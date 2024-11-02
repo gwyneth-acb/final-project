@@ -1,0 +1,75 @@
+
+body {
+    background: aliceblue;
+}
+
+#main-cntr, #time-buttons, #video-cntr, #time-cntr {
+    display: flex;
+    justify-content: center
+
+}
+
+#main-cntr, #time-buttons {
+    flex-wrap: wrap;
+}
+
+#video-cntr, #time-cntr {
+    flex-direction: column;
+    align-items: center;
+    gap: 10pt
+}
+
+#main-cntr {
+    margin: 20pt;
+    gap: 75pt
+}
+
+#video {
+    border: 1pt solid dodgerblue;
+    border-radius: 10px;
+    padding: 90pt 160pt ;
+}
+
+#todo-cntr {
+    margin-top: 70pt;
+    border: 1pt solid dodgerblue;
+    border-radius: 10px;
+    height: 475pt;
+    width: 250pt;
+}
+
+
+#time-buttons {
+    gap: 10pt
+}
+
+#time-cntr {
+    padding: 30pt
+}
+
+#time {
+    font-size: 120pt;
+    margin: 0pt;
+    font-style: italic
+}
+
+h1 {
+    font-size: 30pt;
+    margin-left: 20pt;
+}
+
+#todo-list {
+    margin-left: 40pt;
+}
+
+#link-input {
+    text-align: left;
+}
+
+#affirmation {
+    margin-bottom: 5pt;
+}
+
+p, h1, button {
+    color: blueviolet;
+}
