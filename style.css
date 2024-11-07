@@ -15,9 +15,14 @@ body {
 
 #video-cntr, #time-cntr {
     flex-direction: column;
-    align-items: center;
+
     gap: 10pt
 }
+
+#video-cntr, #time-cntr, #time-buttons {
+    align-items: center;
+}
+
 
 #main-cntr {
     margin: 20pt;
@@ -25,19 +30,20 @@ body {
 }
 
 #video {
-    border: 1pt solid dodgerblue;
     border-radius: 10px;
     padding: 90pt 160pt ;
 }
 
 #todo-cntr {
     margin-top: 70pt;
-    border: 1pt solid dodgerblue;
     border-radius: 10px;
     height: 475pt;
     width: 250pt;
 }
 
+#video, #todo-cntr, button {
+    border: 1pt solid dodgerblue;
+}
 
 #time-buttons {
     gap: 10pt
@@ -72,4 +78,11 @@ h1 {
 
 p, h1, button {
     color: blueviolet;
+}
+
+button {
+    font-size: 15pt;
+    background: transparent;
+    border-radius: 20pt;
+    padding: 5pt 10pt;
 }
