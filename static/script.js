@@ -48,6 +48,7 @@
  *    = if the same video is playing, do nothign
  *    = else, get video id
  *    = w/ video id, send a fetch request to flask
+ *    = also get a fetch request from affirmations api and change that
  *    = should return 3 colors,
  *    = change colors of the screen
  *
