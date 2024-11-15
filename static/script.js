@@ -90,39 +90,80 @@ resetBtn.addEventListener('click', resetTimer);
  *
  */
 
-const checkbox = document.querySelector('input[type="checkbox"][name="checkbox"][value="completed"]');
-const taskTextbox = document.querySelector('.task-textbox[name="task"]');
+const todoList = document.getElementById('todo-list');
 
-function strikethrough() {
-    let text = checkbox.closest('.task').querySelector('.task-textbox');
+todoList.addEventListener('click', (event) => {
 
-    if (checkbox.checked) {
-      text.style.textDecoration = 'line-through';
-    } else {
-      text.style.textDecoration = 'none';
+    // crossing textbox
+    if (event.target && event.target.classList.contains('checkbox')) {
+        const task = event.target.closest('.task');
+
+        if (event.target.checked) {
+            task.querySelector('.task-textbox').style.textDecoration = 'line-through';
+        } else {
+            task.querySelector('.task-textbox').style.textDecoration = 'none';
+        }
     }
-}
 
+    // delete btn
+    else if (event.target && event.target.classList.contains('delete-task')) {
+        const task = event.target.closest('.task');
+        task.remove();
+    }
+});
 
-// makes and new task div
-function toNextLine(event) {
-    if (event.key === 'Enter' && taskTextbox.value.trim() !== '') {
+// Handle interactions with textboxes (keydown event, for Enter key)
+todoList.addEventListener('keydown', (event) => {
 
-        let newTask = createNewTask();
-        let newTaskTextbox = newTask.querySelector('input[type="text"]');
-        newTaskTextbox.addEventListener("keydown", (event) => {
-            if (event.key === 'Enter' && newTaskTextbox.value.trim() !== '') {
-                let newestTask = document.getElementById("todo-list").appendChild(createNewTask());
-                let newestTextbox = newestTask.querySelector('input[type="text"]');
-                newestTextbox.focus()
+    // entering
+    if (event.target && event.target.classList.contains('task-textbox') && event.key === 'Enter') {
+        const textbox = event.target;
+        const currTask = textbox.closest('.task');
+
+        if (textbox.value.trim() !== '' && currTask === todoList.lastElementChild) {
+            let newTask = todoList.appendChild(createNewTask());
+            newTask.querySelector('.task-textbox').focus();
+        }
+
+    // backspacing
+    } else if (event.target && event.target.classList.contains('task-textbox') && event.key === 'Backspace') {
+
+        const textbox = event.target;
+        const currTask = textbox.closest('.task');
+
+        // focus on previous textbox if it exists & remove curr task
+        const previousTask = currTask.previousElementSibling;
+        if (previousTask && textbox.value.trim() === '') {
+            previousTask.querySelector('.task-textbox').focus();
+            currTask.remove()
+        }
+    }
+});
+
+todoList.addEventListener('mouseover', (event) => {
+    const task = event.target.closest('.task');
+    if (task) {
+        const textbox = task.querySelector('.task-textbox');
+        const deleteBtn = task.querySelector('.delete-btn');
+        if (deleteBtn) {
+            if (textbox.value.trim() !== '') {
+                deleteBtn.style.display = 'inline-block'; // Show button
+            } else {
+                deleteBtn.style.display = 'none'; // Hide button
             }
-        })
-
-        document.getElementById("todo-list").appendChild(newTask);
-        newTaskTextbox.focus()
-
+        }
     }
-}
+});
+
+todoList.addEventListener('mouseout', (event) => {
+    const task = event.target.closest('.task');
+    if (task) {
+        const deleteBtn = task.querySelector('.delete-btn');
+        if (deleteBtn) {
+            deleteBtn.style.display = 'none'; // Hide button
+        }
+    }
+});
 
 function createNewTask() {
 
@@ -146,7 +187,7 @@ function createNewTask() {
     // make delete button
     let newButton = document.createElement("button");
     newButton.textContent = "❌";
-    newButton.setAttribute('id', 'delete-task');
+    newButton.setAttribute('class', 'delete-task');
 
     //apphend
     newTask.appendChild(newCheckbox);
@@ -155,11 +196,6 @@ function createNewTask() {
 
     return newTask;
 }
-
-checkbox.addEventListener("change", strikethrough);
-taskTextbox.addEventListener("keydown", (event) => {
-    toNextLine(event);
-})
 
 
 

@@ -80,6 +80,12 @@ p, h1, button {
     color: blueviolet;
 }
 
+.delete-task {
+    font-size: 8pt;
+    padding: 3pt;
+    display: none;
+}
+
 button {
     font-size: 15pt;
     background: transparent;
@@ -93,12 +99,10 @@ button {
     outline: none
 }
 
-#delete-task {
-    font-size: 8pt;
-    padding: 3pt;
-    display: none;
-}
-
 .task {
     padding: 2pt;
+}
+
+.task:hover .delete-task {
+    display: inline-block;
 }
