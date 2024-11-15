@@ -12,7 +12,7 @@
 <section id="main-cntr">
     <div>
         <section id="time-cntr">
-            <h1 id="time"> 1:00 </h1>
+            <h1 id="time"> 00:00 </h1>
             <section id="time-buttons">
                 <div>
                     <button id="pause"> ⏸️ </button>
@@ -20,8 +20,8 @@
                     <button id="reset"> 🔄 </button>
                 </div>
                 <div>
-                    <button id="add-five"> +5:00</button>
-                    <button id="add-ten"> +10:00</button>
+                    <button id="add-five" class="setter" adding="300"> +5:00</button>
+                    <button id="add-ten" class="setter" adding="600"> +10:00</button>
                 </div>
             </section>
         </section>
@@ -38,7 +38,11 @@
         <section id="todo-cntr">
             <h1> todo list</h1>
             <div id="todo-list">
-                <p> items</p>
+                <div class="task">
+                    <input type="checkbox" name="checkbox" value="completed" class="checkbox">
+                    <input type="text" name="task" placeholder="enter task here" class="task-textbox">
+                    <button id="delete-task"> ❌ </button>
+                </div>
             </div>
 
         </section>

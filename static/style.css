@@ -86,3 +86,19 @@ button {
     border-radius: 20pt;
     padding: 5pt 10pt;
 }
+
+.task-textbox {
+    background: transparent;
+    border: none;
+    outline: none
+}
+
+#delete-task {
+    font-size: 8pt;
+    padding: 3pt;
+    display: none;
+}
+
+.task {
+    padding: 2pt;
+}
