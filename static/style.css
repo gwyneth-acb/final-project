@@ -29,7 +29,7 @@ body {
     gap: 75pt
 }
 
-#video {
+#placeholder-image {
     border-radius: 10px;
     padding: 90pt 160pt ;
 }
@@ -41,7 +41,7 @@ body {
     width: 250pt;
 }
 
-#video, #todo-cntr, button {
+#placeholder-image , #todo-cntr, button {
     border: 1pt solid dodgerblue;
 }
 
@@ -105,4 +105,17 @@ button {
 
 .task:hover .delete-task {
     display: inline-block;
+}
+
+#player {
+  display: none;
+  padding: 10pt;
+  border-radius: 15px;
+  overflow: hidden; /* Ensures the iframe fits within the rounded corners */
+}
+
+#player iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px; /* Ensure iframe corners are also rounded */
 }

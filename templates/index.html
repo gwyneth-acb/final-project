@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Focus Dashboard</title>
+    <script src="https://www.youtube.com/iframe_api" defer></script>
     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
 
@@ -28,9 +29,15 @@
         <section id="video-cntr">
             <p id="affirmation"> "im an affirmation" </p>
             <div>
-                <img id="video" src="https://stardewvalleywiki.com/mediawiki/images/2/22/White_Chicken.png" alt="sdv chx">
+
+                <img id="placeholder-image" src="https://stardewvalleywiki.com/mediawiki/images/2/22/White_Chicken.png" alt="sdv chx">
                 <div id="player"></div>
-                <p id="link-input"> insert link </p>
+
+                <div>
+                    <input type="text" name="link" placeholder="insert link here" id="playlist-link">
+                    <button id="link-button"> run playlist !</button>
+                </div>
+
             </div>
         </section>
     </div>

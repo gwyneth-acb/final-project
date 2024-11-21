@@ -80,14 +80,6 @@ resetBtn.addEventListener('click', resetTimer);
 /**
  * TO-DO FEATURE
  *
- * write event listener code
- *  [] for checkboxes => checking off things => strike through
- *  [] add 'delete button' when hovering over a task
- *    [] when clicking delete button, delete the task
- *  [] task things
- *    [] when empty teask, if backspacing, go back to previous row and be typing there
- *    [] when filled task & enter, make new task item
- *
  */
 
 const todoList = document.getElementById('todo-list');
@@ -220,3 +212,47 @@ function createNewTask() {
  *    = change colors of the screen
  *
  */
+
+
+let player;
+
+// Initializes the player once the API is ready
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    playerVars: {
+      listType: 'playlist',
+      list: '' // Load the default playlist here
+    },
+    events: {
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+function onPlayerReady() {
+  console.log("YouTube Player is ready!");
+}
+
+
+document.getElementById("link-button").addEventListener("click", () => {
+  let playlistLink = document.getElementById("playlist-link").value;
+  let playlistId = extractPlaylistId(playlistLink);
+   player.loadPlaylist({
+      listType: 'playlist',
+      list: playlistId
+    });
+    document.getElementById('placeholder-image').style.display = 'none';
+    document.getElementById('player').style.display = 'block';
+});
+
+function extractPlaylistId(url) {
+  let regex = /(?:list=)([a-zA-Z0-9_-]+)/;
+  let match = url.match(regex);
+  return match ? match[1] : null;
+}
+
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    console.log("Video is playing.");
+  }
+}
