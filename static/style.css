@@ -111,11 +111,11 @@ button {
   display: none;
   padding: 10pt;
   border-radius: 15px;
-  overflow: hidden; /* Ensures the iframe fits within the rounded corners */
+  overflow: hidden;
 }
 
 #player iframe {
   width: 100%;
   height: 100%;
-  border-radius: 15px; /* Ensure iframe corners are also rounded */
+  border-radius: 15px;
 }

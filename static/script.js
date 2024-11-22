@@ -189,30 +189,7 @@ function createNewTask() {
     return newTask;
 }
 
-
-
-/**
- * INSERT PLAYLIST FEATURE
- *   [] add input for inserting url
- *   [] initialize player
- *   [] create 'load' function that plays from specific url
- *   [] when pressing play button, do the following
- *    - get the playlist ID from the url
- *    - replace temp image with 'player'
- *    = call load function
- *    = potentially save previously used playlists in local storage and be able to play it again
- *
- * CHANGE BACKGROUND FEATURE
- *  [] create an 'on player state change' function
- *    = if the same video is playing, do nothign
- *    = else, get video id
- *    = w/ video id, send a fetch request to flask
- *    = also get a fetch request from affirmations api and change that
- *    = should return 3 colors,
- *    = change colors of the screen
- *
- */
-
+// INSERT PLAYLIST FEATURE
 
 let player;
 
@@ -251,8 +228,50 @@ function extractPlaylistId(url) {
   return match ? match[1] : null;
 }
 
+/**
+ *
+ * CHANGE BACKGROUND FEATURE
+ *  [] create an 'on player state change' function
+ *    = if the same video is playing, do nothign
+ *    = else, get video id
+ *    = w/ video id, send a fetch request to flask
+ *    = also get a fetch request from affirmations api and change that
+ *    = should return 3 colors,
+ *    = change colors of the screen
+ *
+ */
+
 function onPlayerStateChange(event) {
-  if (event.data == YT.PlayerState.PLAYING) {
-    console.log("Video is playing.");
+    if (event.data == YT.PlayerState.PLAYING) {
+
+        let videoId = event.target.getVideoData().video_id;
+
+        // Fetch data from Flask backend
+        fetch(`/getColors/${videoId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Couldn't get colors (network response issue)");
+                }
+                return response.json();
+            })
+            .then(data => {
+
+                console.log(data)
+                let [textColor, borderColor, backgroundColor] = data;
+
+                // Update the styles of the webpage
+                document.body.style.backgroundColor = backgroundColor;
+                document.querySelectorAll("h1, button, input, p").forEach(element => {
+                    element.style.color = textColor;
+                });
+                document.querySelectorAll("button, #placeholder-image, #todo-cntr").forEach(element => {
+                    element.style.borderColor = borderColor;  // Dynamically set the border color
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
   }
+
 }
+
