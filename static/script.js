@@ -104,7 +104,7 @@ todoList.addEventListener('click', (event) => {
     }
 });
 
-// Handle interactions with textboxes (keydown event, for Enter key)
+// navigates through textboxes through keyboard commands (delete & enter keys)
 todoList.addEventListener('keydown', (event) => {
 
     // entering
@@ -132,6 +132,7 @@ todoList.addEventListener('keydown', (event) => {
     }
 });
 
+// shows delete button when hovering over a task with words
 todoList.addEventListener('mouseover', (event) => {
     const task = event.target.closest('.task');
     if (task) {
@@ -139,14 +140,15 @@ todoList.addEventListener('mouseover', (event) => {
         const deleteBtn = task.querySelector('.delete-btn');
         if (deleteBtn) {
             if (textbox.value.trim() !== '') {
-                deleteBtn.style.display = 'inline-block'; // Show button
+                deleteBtn.style.display = 'inline-block'; // shows button
             } else {
-                deleteBtn.style.display = 'none'; // Hide button
+                deleteBtn.style.display = 'none'; // hides button
             }
         }
     }
 });
 
+// hides delete button when hovering over a task with words
 todoList.addEventListener('mouseout', (event) => {
     const task = event.target.closest('.task');
     if (task) {
@@ -157,6 +159,7 @@ todoList.addEventListener('mouseout', (event) => {
     }
 });
 
+// creates a new task on enter
 function createNewTask() {
 
     //make new div
@@ -193,12 +196,12 @@ function createNewTask() {
 
 let player;
 
-// Initializes the player once the API is ready
+// initiliazes player when api is ready
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     playerVars: {
       listType: 'playlist',
-      list: '' // Load the default playlist here
+      list: '' // empty bc it's dynamically loaded
     },
     events: {
       'onStateChange': onPlayerStateChange
