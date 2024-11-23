@@ -274,7 +274,32 @@ function onPlayerStateChange(event) {
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
-  }
+
+        fetchAffirmation()
+   }
 
 }
+
+function fetchAffirmation() {
+    fetch('https://www.affirmations.dev/')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Couldn't get affirmations`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayAffirmation(data.affirmation);
+        })
+        .catch(error => {
+            console.error('Error fetching affirmation:', error);
+        });
+}
+
+// Function to display affirmation on the page
+function displayAffirmation(affirmation) {
+    const affirmationElement = document.getElementById('affirmation');
+    affirmationElement.textContent = affirmation;
+}
+
 
