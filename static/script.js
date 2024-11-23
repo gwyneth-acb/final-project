@@ -231,18 +231,7 @@ function extractPlaylistId(url) {
   return match ? match[1] : null;
 }
 
-/**
- *
- * CHANGE BACKGROUND FEATURE
- *  [] create an 'on player state change' function
- *    = if the same video is playing, do nothign
- *    = else, get video id
- *    = w/ video id, send a fetch request to flask
- *    = also get a fetch request from affirmations api and change that
- *    = should return 3 colors,
- *    = change colors of the screen
- *
- */
+// CHANGE BACKGROUND FEATURE
 
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING) {
@@ -274,32 +263,19 @@ function onPlayerStateChange(event) {
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
-
-        fetchAffirmation()
    }
 
 }
 
-function fetchAffirmation() {
-    fetch('https://www.affirmations.dev/')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Couldn't get affirmations`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            displayAffirmation(data.affirmation);
-        })
-        .catch(error => {
-            console.error('Error fetching affirmation:', error);
-        });
-}
+// UPCOMING FEATURE: SAVE PLAYLIST LINKS
 
-// Function to display affirmation on the page
-function displayAffirmation(affirmation) {
-    const affirmationElement = document.getElementById('affirmation');
-    affirmationElement.textContent = affirmation;
-}
+// when hitting star button next to run playlist button, save link
+    // get 'links' from local storage
+    // push a certain link from 'input' field into local storage
 
+// add a delete button on hover on individual links
+    // get links from local storage
+    // remove link from list
 
+// add event listener for when dom content is loaded
+    // for each link, make new <p> that has saved link (with star in front) and apphend to dom
