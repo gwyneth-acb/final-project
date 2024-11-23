@@ -3,6 +3,10 @@ from colorthief import ColorThief
 import requests
 from io import BytesIO
 import urllib.parse, urllib.request, urllib.error, json
+import os
+
+
+API_KEY = os.getenv('API_KEY')
 
 app = Flask(__name__)
 
@@ -18,13 +22,23 @@ def getColors(videoID):
 
 def getDomColor(videoID):
 
+    #thumbnail_url = f"https://img.youtube.com/vi/{videoID}/hqdefault.jpg"
+    #response = requests.get(thumbnail_url)
 
-    thumbnail_url = f"https://img.youtube.com/vi/{videoID}/hqdefault.jpg"
-    response = requests.get(thumbnail_url)
+    youtubeAPIURL = "https://www.googleapis.com/youtube/v3/videos"
+    params = {
+        'id': videoID,
+        'part': 'snippet',
+        'key': API_KEY
+    }
 
+    response = requests.get(youtubeAPIURL, params=params)
+    data = response.json()
+    thumbnail_url = data['items'][0]['snippet']['thumbnails']['high']['url']
+    img_response = requests.get(thumbnail_url)
 
     if response.status_code == 200:
-        thumbnailData = BytesIO(response.content)
+        thumbnailData = BytesIO(img_response.content)
         colorThief = ColorThief(thumbnailData)
 
         domColor = colorThief.get_color(quality=1)  # Adjust quality as needed
