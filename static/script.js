@@ -270,8 +270,25 @@ function onPlayerStateChange(event) {
 // UPCOMING FEATURE: SAVE PLAYLIST LINKS
 
 // when hitting star button next to run playlist button, save link
+document.getElementById("save").addEventListener("click", () => {
+
+    // get playlist link
+    let playlistLink = document.getElementById("playlist-link").value;
+
     // get 'links' from local storage
-    // push a certain link from 'input' field into local storage
+    let linkList = JSON.parse(localStorage.getItem("linkList")) || [];
+
+    // check if playlist is already in link
+    if (!linkList.includes(playlistLink)) {
+
+        // push a certain link from 'input' field into local storage
+        linkList.push(playlistLink);
+        localStorage.setItem("linkList", JSON.stringify(linkList));
+        displaySavedLinks();
+
+    }
+
+});
 
 // add a delete button on hover on individual links
     // get links from local storage
@@ -279,3 +296,8 @@ function onPlayerStateChange(event) {
 
 // add event listener for when dom content is loaded
     // for each link, make new <p> that has saved link (with star in front) and apphend to dom
+
+//display saved links function
+function displaySavedLinks() {
+    let linkCntr = document.getElementById("linkList");
+}
