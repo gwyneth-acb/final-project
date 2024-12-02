@@ -84,6 +84,7 @@ resetBtn.addEventListener('click', resetTimer);
 
 const todoList = document.getElementById('todo-list');
 
+// listens for clicks (checkboxes & deleting)
 todoList.addEventListener('click', (event) => {
 
     // crossing textbox
@@ -102,6 +103,7 @@ todoList.addEventListener('click', (event) => {
         const task = event.target.closest('.task');
         task.remove();
     }
+
 });
 
 // navigates through textboxes through keyboard commands (delete & enter keys)
@@ -248,7 +250,6 @@ function onPlayerStateChange(event) {
             })
             .then(data => {
 
-                console.log(data)
                 let [textColor, borderColor, backgroundColor] = data;
 
                 // Update the styles of the webpage
@@ -290,14 +291,82 @@ document.getElementById("save").addEventListener("click", () => {
 
 });
 
-// add a delete button on hover on individual links
-    // get links from local storage
-    // remove link from list
-
-// add event listener for when dom content is loaded
-    // for each link, make new <p> that has saved link (with star in front) and apphend to dom
+// add event listener to display links for when dom content is loaded
+document.addEventListener("DOMContentLoaded", displaySavedLinks);
 
 //display saved links function
 function displaySavedLinks() {
+
+    // get link container
     let linkCntr = document.getElementById("linkList");
+
+    // clear links so there's no dupes
+    linkCntr.innerHTML = "";
+
+    // get 'links' from local storage
+    let linkList = JSON.parse(localStorage.getItem("linkList")) || [];
+
+    // creates link list
+    for (let i = 0; i < linkList.length; i++) {
+
+        // creates div
+        let linkDiv = document.createElement("div");
+        linkDiv.setAttribute('class', 'link-box');
+
+        // makes link text
+        let link = document.createElement("p");
+        link.textContent = linkList[i];
+        linkDiv.appendChild(link);
+
+        // creates delete button & behaviour
+        let newButton = document.createElement("button");
+        newButton.textContent = "❌";
+        newButton.setAttribute('class', 'delete-task');
+
+        newButton.style.display = "none"; // Start hidden
+
+        // shows button when hovering over
+        linkDiv.addEventListener("mouseover", () => {
+            newButton.style.display = "inline-block"; // Shows the button
+        });
+
+        //hides it
+        linkDiv.addEventListener("mouseout", () => {
+            newButton.style.display = "none"; // Hides the button
+        });
+
+        // deletes link on dom
+        newButton.addEventListener('click', (event) => {
+
+            // delete btn
+            const link = event.target.closest("div"); // finds parent div
+            if (link) {
+                deleteFromLinkList(link.querySelector("p").textContent); // deletes from list
+                link.remove(); // remove from DOM
+            }
+
+        });
+
+        // appends button to link div
+        linkDiv.appendChild(newButton);
+
+        // puts into page
+        linkCntr.appendChild(linkDiv);
+    }
+
+}
+
+// delete from local storage
+function deleteFromLinkList(link) {
+
+    // get 'links' from local storage
+    let linkList = JSON.parse(localStorage.getItem("linkList")) || [];
+
+    // removes link from list
+    let linkIndex = linkList.indexOf(link);
+    if (linkIndex > -1) {
+        linkList.splice(linkIndex, 1);
+    }
+    localStorage.setItem("linkList", JSON.stringify(linkList));
+
 }

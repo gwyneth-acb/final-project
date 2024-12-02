@@ -15,7 +15,6 @@ body {
 
 #video-cntr, #time-cntr {
     flex-direction: column;
-
     gap: 10pt
 }
 
@@ -84,6 +83,11 @@ p, h1, button {
     font-size: 8pt;
     padding: 3pt;
     display: none;
+}
+
+.link-box {
+    display: flex;
+    gap: 20pt
 }
 
 button {
