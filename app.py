@@ -22,9 +22,6 @@ def getColors(videoID):
 
 def getDomColor(videoID):
 
-    #thumbnail_url = f"https://img.youtube.com/vi/{videoID}/hqdefault.jpg"
-    #response = requests.get(thumbnail_url)
-
     youtubeAPIURL = "https://www.googleapis.com/youtube/v3/videos"
     params = {
         'id': videoID,
@@ -41,7 +38,7 @@ def getDomColor(videoID):
         thumbnailData = BytesIO(img_response.content)
         colorThief = ColorThief(thumbnailData)
 
-        domColor = colorThief.get_color(quality=1)  # Adjust quality as needed
+        domColor = colorThief.get_color(quality=1)
         finalCode = rgb_to_hex(domColor)
         return finalCode
     else:
@@ -51,7 +48,6 @@ def getDomColor(videoID):
 def getScheme(code):
     try:
         request = "https://www.thecolorapi.com/scheme?mode=monochrome&count=5&hex=" + code
-
         response = urllib.request.urlopen(request)
     except urllib.error.URLError as e:
         print("Error trying to retrieve data")
@@ -68,6 +64,7 @@ def processRawScheme(rawScheme):
     compiledValues = [color["hex"]["value"] for color in rawScheme["colors"]]
     cleanScheme = [compiledValues[0], compiledValues[2], compiledValues[4]]
     return cleanScheme
+
 
 def rgb_to_hex(rgb):
     return '#{:02x}{:02x}{:02x}'.format(rgb[0], rgb[1], rgb[2])
