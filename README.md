@@ -13,7 +13,7 @@ This project includes creating a focus dashboard for users to have a minimalist-
 - flask to run the site
 
 ## Set-up instructions
-commands may vary based on device 
+commands may vary based on os system 
 1. clone the repository (git clone https://github.com/gwyneth-acb/final-project/)
 2. create a virtual environment (python -m venv venv) & activate it (venv\Scripts\activate)
 3. install required dependencies ((pip install -r requirements.txt)
