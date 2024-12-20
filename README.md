@@ -2,6 +2,8 @@
 
 This project includes creating a focus dashboard for users to have a minimalist-style webpage that reduces distraction during worktime to increase productivity. Includes a timer feature, a to-do list feature and a insert-playlist feature that plays youtube playlists. With each new video, a new color scheme that relates to the thumbnail of the current video will decorate the webpage.
 
+a live version of the site can be found here https://gwynethacb.pythonanywhere.com/ 
+
 ## Key Features
 - timer
 - to-do list
