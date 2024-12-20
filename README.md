@@ -6,7 +6,7 @@ a live version of the site can be found here https://gwynethacb.pythonanywhere.c
 
 ## Key Features
 - timer
-- to-do list
+- to-do list (keyboard navigable)
 - youtube player (only runs playlists)
 - color changing background
 
@@ -18,7 +18,7 @@ a live version of the site can be found here https://gwynethacb.pythonanywhere.c
 commands may vary based on os system 
 1. clone the repository (git clone https://github.com/gwyneth-acb/final-project/)
 2. create a virtual environment (python -m venv venv) & activate it (venv\Scripts\activate)
-3. install required dependencies ((pip install -r requirements.txt)
+3. install required dependencies (pip install -r requirements.txt)
 4. run the project (flask run)
 
 ## Site Guide
